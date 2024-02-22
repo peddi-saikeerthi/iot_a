@@ -6,12 +6,21 @@ const Schema = mongoose.Schema;
  
 const sensordataSchema = new Schema(
     {
-      waterlevel: {
+      voltage: {
         type: Schema.Types.Number,
         required: true,
       },
-      motorstatus: {
-        type: Schema.Types.String,
+      current: {
+        type: Schema.Types.Number,
+        required: true,
+      },
+  
+      temparature: {
+        type: Schema.Types.Number,
+        required: true,
+      },
+      humidity: {
+        type: Schema.Types.Number,
         required: true,
       },
     },

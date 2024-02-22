@@ -6,8 +6,8 @@ const router=express.Router();
 const sensorDataController=require('../controllers/sensordataController');
 
 
-router.post("/sensordata",sensorDataController.sensordataHandler);
+router.post("/iota/sensordata",sensorDataController.sensordataHandler);
 
-router.get("/sensordata",sensorDataController.getdataHandler);
+router.get("/iota/sensordata",sensorDataController.getdataHandler);
 
 module.exports=router;

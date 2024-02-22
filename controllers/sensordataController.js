@@ -4,7 +4,7 @@ const SensorData = require("../models/sensordata");
 
 const sensordataHandler = async (req, res, next) => {
   
-  const { waterlevel, motorstatus } = req.body;
+  const {voltage,current,temparature,humidity } = req.body;
 
 
   
@@ -29,15 +29,20 @@ const sensordataHandler = async (req, res, next) => {
     const result = await SensorData.findOneAndUpdate(
       { _id: sensordata[0]._id },
       {
-        waterlevel: waterlevel,
-        motorstatus: motorstatus,
+        voltage: voltage,
+        current: current,
+        temparature: temparature,
+        humidity: humidity
+        
       }
     );
   } else {
     try {
       const newSensorData = new SensorData({
-        waterlevel: waterlevel,
-        motorstatus: motorstatus,
+        voltage: voltage,
+        current: current,
+        temparature: temparature,
+        humidity: humidity
 
 
 
@@ -56,32 +61,29 @@ const sensordataHandler = async (req, res, next) => {
   });
 };
 
-const addHours = (numOfHours, date = new Date()) => {
-  date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
 
-  return date;
-}
 
 const getdataHandler = async (req, res, next) => {
   let sensordata, updatedAtnew;
   try {
     sensordata = await SensorData.find();
-    //console.log(sensordata);
+    console.log(sensordata);
   } catch (err) {
     console.log(err);
     return res.status(500).json({
       message: "Getting Data Failed",
     });
   }
-  if (sensordata.length == 1) {
-    const updatedAtold = new Date(sensordata[0].updatedAt);
-    updatedAtnew = addHours(5.511, updatedAtold);
-    
-  }
+ 
 
   const data = {
-    waterlevel: sensordata[0].waterlevel,
-    motorstatus: sensordata[0].motorstatus,
+    voltage: sensordata[0].voltage,
+    current: sensordata[0].current,
+    temparature: sensordata[0].temparature,
+    humidity: sensordata[0].humidity,
+
+   
+
     
   }
   
